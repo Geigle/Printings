@@ -3,7 +3,7 @@ Contents of this directory are copyrighted 2024 by Gage Geigle, unless noted
 and attributed otherwise.
 
 # Attributions
-## [Fishtown](https://www.printables.com/@Fishtown_327933) is the creator of 
+[Fishtown](https://www.printables.com/@Fishtown_327933) is the creator of 
 [Raspberry_Pi_Mount_V1.stl](https://www.printables.com/model/253933-simple-raspberry-pi-mount)
 . Please follow the link to obtain the STL file.
 
