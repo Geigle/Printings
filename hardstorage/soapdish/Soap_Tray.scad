@@ -4,6 +4,7 @@ TRAY_D_mm=20+(2*2.54*10);
 EDGE_RAD_mm=15;
 density=17;
 
+/* EXPERIMENTAL */
 module SoapPuckTray()
 {
 	TRAY(key=true, keyhole=true);
@@ -53,12 +54,14 @@ module bar_negation(x_mm, y_mm, z_mm, rad_mm)
 	}
 }
 
+/* EXPERIMENTAL */
 module keyjoint()
 {
 	cube([6,3,3]);
 	translate([3,-1.5,0]) cube([3,6,6]);
 }
 
+/* EXPERIMENTAL */
 module keyjoint_pair(separation_mm)
 {
 	keyjoint();
@@ -93,6 +96,6 @@ module TRAY(key=false, keyhole=false)
 
 
 
-//$fn = 90;
+$fn = 90;
 
 TRAY();
