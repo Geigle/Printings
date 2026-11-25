@@ -1,14 +1,10 @@
-TRAY_W_mm=20+(3*2.54*10);
+SOAP_W_INCH=3;
+SOAP_D_INCH=2;
+TRAY_W_mm=20+(SOAP_W_INCH*2.54*10);
 TRAY_H_mm=10;
-TRAY_D_mm=20+(2*2.54*10);
+TRAY_D_mm=20+(SOAP_D_INCH*2.54*10);
 EDGE_RAD_mm=15;
-density=17;
-
-/* EXPERIMENTAL */
-module SoapPuckTray()
-{
-	TRAY(key=true, keyhole=true);
-}
+density=21; // Higher number, more slots.
 
 module tray_base(w_mm, h_mm, d_mm, rad_mm)
 {
@@ -57,8 +53,14 @@ module bar_negation(x_mm, y_mm, z_mm, rad_mm)
 /* EXPERIMENTAL */
 module keyjoint()
 {
-	cube([6,3,3]);
-	translate([3,-1.5,0]) cube([3,6,6]);
+	translate([4,0,0]){
+        rotate([0,-90,0]){
+            linear_extrude(height=4, center=false, convexity=1, twist=0, scale=1.0, slices=10, segments=0, $fn=16) {
+                polygon([[0,0],[0,3],[5,2],[5,1]]);
+            }
+        }
+    } //cube([6,3,3]);
+	translate([5.5,1.5,0]) cylinder(h=5, r1=3, r2=2); //cube([3,6,3]);
 }
 
 /* EXPERIMENTAL */
@@ -94,8 +96,17 @@ module TRAY(key=false, keyhole=false)
 	}
 };
 
+module SINGLE_TRAY() TRAY(key=false, keyhole=false);
+module START_TRAY() TRAY(key=true, keyhole=false);
+module MID_TRAY() TRAY(key=true, keyhole=true);
+module END_TRAY() TRAY(key=false, keyhole=true);
+/* EXPERIMENTAL */
+module SoapPuckTray()
+{
+	TRAY(key=true, keyhole=true);
+}
 
 
 $fn = 90;
 
-TRAY();
+SINGLE_TRAY();
