@@ -29,15 +29,21 @@ module pi_post(){
     }
 }
 
+module pi_post_array(){
+union(){
+    pi_post();
+    translate([0,49,0]) pi_post();
+    translate([58,49,0]) pi_post();
+    translate([58,0,0]) pi_post();
+    }
+}
+
 module plate(){
 difference(){
 union(){
     plate_basic();
     $fn=60;
-    translate([8,7,0]) pi_post();
-    translate([8,56,0]) pi_post();
-    translate([66,7,0]) pi_post();
-    translate([66,56,0]) pi_post();
+    translate([8,7,0]) pi_post_array();
 }
 translate([ZULKIT_G_TUB_POST1_HINGE_WALL_DISTANCE_MM, 0, 0]) cylinder(10, 2, 2);
 translate([ZULKIT_G_TUB_POST4_HINGE_WALL_DISTANCE_MM, 0, 0]) cylinder(10, 2, 2);
