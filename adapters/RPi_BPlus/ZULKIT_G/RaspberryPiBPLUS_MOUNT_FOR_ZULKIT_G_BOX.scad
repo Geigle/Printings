@@ -14,22 +14,30 @@ ZULKIT_G_TUB_POST2_SIDE_WALL_DISTANCE_MM=16;
 ZULKIT_G_TUB_POST3_SIDE_WALL_DISTANCE_MM=16;
 ZULKIT_G_TUB_POST4_SIDE_WALL_DISTANCE_MM=65.5;
 ZULKIT_G_TUB_POST4_LATCH_WALL_DISTANCE_MM=18;
+RPI_POST_RADIUS=2;
+RPI_POST_SCREW_RADIUS=1;
+RPI_POST_HEIGHT=8;
 
 FRAME_DEPTH_MM=4.5;
 
 $fn=20;
 
-module pi_plate(){
-    import("Raspberry_Pi_Mount_V1.stl", convexity=3);
+module pi_post(){
+    difference() {
+        cylinder(h=RPI_POST_HEIGHT, r1=RPI_POST_RADIUS+3, r2=RPI_POST_RADIUS, center=false);
+        cylinder(h=RPI_POST_HEIGHT, r=RPI_POST_SCREW_RADIUS, center=false);
+    }
 }
 
 module plate(){
 difference(){
-//translate([(ZULKIT_G_INTERN_WIDTH_MM / 2), 0, FRAME_DEPTH_MM/2])
-//    cube([ZULKIT_G_INTERN_WIDTH_MM, ZULKIT_G_INTERN_HEIGHT_MM, FRAME_DEPTH_MM], center=true);
 union(){
     plate_basic();
-    translate([47, 31, 7]) pi_plate();
+    $fn=60;
+    translate([8,7,0]) pi_post();
+    translate([8,56,0]) pi_post();
+    translate([66,7,0]) pi_post();
+    translate([66,56,0]) pi_post();
 }
 translate([ZULKIT_G_TUB_POST1_HINGE_WALL_DISTANCE_MM, 0, 0]) cylinder(10, 2, 2);
 translate([ZULKIT_G_TUB_POST4_HINGE_WALL_DISTANCE_MM, 0, 0]) cylinder(10, 2, 2);
@@ -40,7 +48,6 @@ translate([ZULKIT_G_TUB_POST3_HINGE_WALL_DISTANCE_MM, (ZULKIT_G_TUB_POST_C2C_DIS
     translate([10,-50, 0])cube([40, 40, FRAME_DEPTH_MM]);
     translate([ZULKIT_G_INTERN_WIDTH_MM-50,-50, 0])cube([40, 40, FRAME_DEPTH_MM]);
 }
-
 }
 
 module plate_basic(){
